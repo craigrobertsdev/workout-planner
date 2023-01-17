@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Button from './button';
 // import '../assets/css/exercise-list.css';
 
-const ExerciseList = () => {
+const ExerciseList = ({ setOpenExerciseList, setLastSelectedExercise }) => {
   const [currentCategory, setCategory] = useState('Legs');
-  const [selectedExercise, setSelectedExercise] = useState('');
 
+  setLastSelectedExercise('Back Squat');
   const exerciseCategories = [
     {
       name: 'Legs',
@@ -33,47 +33,62 @@ const ExerciseList = () => {
     },
   ];
 
-  const style = {
-    marginLeft: '-1px',
-    marginRight: '-1px',
-    marginBottom: '-1px',
-  };
   return (
-    <div id='exercise-list'>
-      <div id='header-buttons'>
-        {exerciseCategories.map((category, i) => (
-          <Button type={'workout-button'} click={() => setCategory(category.name)} style={style}>
-            {category.name}
-          </Button>
-        ))}
+    // row of buttons for the exercise categories
+    <div className='m-3'>
+      <div id='exercise-list' className='w-fit border'>
+        <div id='header-buttons'>
+          {exerciseCategories.map((category, i) => (
+            <Button buttonType={'header'} click={() => setCategory(category.name)}>
+              {category.name}
+            </Button>
+          ))}
+        </div>
+
+        {/* the list of exercises for each category */}
+        <div id='exercise-categories'>
+          <ExerciseCategory
+            category={exerciseCategories.find((category) => category.name === currentCategory)}
+            setLastSelectedExercise={setLastSelectedExercise}
+            setOpenExerciseList={setOpenExerciseList}
+          />
+        </div>
+        {/* Cancels the exercise selection */}
+        <Button
+          buttonType={'cancel'}
+          style={{ marginTop: '0.5rem' }}
+          click={() => setOpenExerciseList(false)}>
+          Cancel
+        </Button>
       </div>
-      <div id='exercise-categories' className='border'>
-        <ExerciseCategory
-          category={exerciseCategories.find((category) => category.name === currentCategory)}
-        />
-      </div>
-      <div>{selectedExercise}</div>
     </div>
   );
 };
 
-const ExerciseCategory = ({ category }) => {
+const ExerciseCategory = ({ category, setLastSelectedExercise, setOpenExerciseList }) => {
   return (
     <ul id={category.name} className='list-group'>
       {category.exercises.map((exercise, i) => (
-        <Exercise name={exercise} key={exercise + i} />
+        <Exercise
+          name={exercise}
+          setLastSelectedExercise={setLastSelectedExercise}
+          setOpenExerciseList={setOpenExerciseList}
+          key={exercise + i}
+        />
       ))}
     </ul>
   );
 };
 
-const Exercise = ({ name }) => {
-  const buttonStyle = {
-    marginBottom: '-1px',
-    marginTop: '-1px',
-  };
+const Exercise = ({ name, setLastSelectedExercise, setOpenExerciseList }) => {
+  function selectExercise() {
+    setLastSelectedExercise(name);
+    setOpenExerciseList(false);
+    console.log('setting last exercise to: ' + name);
+  }
+
   return (
-    <Button type='exercise-list' click={() => setSelectedExercise(name)} style={buttonStyle}>
+    <Button buttonType='exercise' click={() => selectExercise()}>
       {name}
     </Button>
   );

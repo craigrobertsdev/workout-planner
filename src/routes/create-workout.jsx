@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form } from 'react-router-dom';
 import ExerciseList from '../components/exercise-list';
+import Button from '../components/button';
 
 export function loader() {
   return null;
@@ -9,37 +10,49 @@ export function loader() {
 export function action() {}
 
 const CreateWorkout = () => {
-  let lastExerciseSelected = '';
-  const [selectExercise, setSelectExercise] = useState(false);
+  const [lastExerciseSelected, setLastSelectedExercise] = useState('');
+  const [openExerciseList, setOpenExerciseList] = useState(false);
 
   function onExerciseSearch(event) {}
 
   function addExercise(event) {}
 
+  // useEffect(() => {
+  //   document.getElementById('exercise-search-field').value = lastExerciseSelected;
+  // }, lastExerciseSelected);
+
   return (
     <>
-      {selectExercise ? (
-        <ExerciseList setSelectExercise={setSelectExercise} />
+      {openExerciseList ? (
+        <ExerciseList
+          setOpenExerciseList={setOpenExerciseList}
+          setLastSelectedExercise={setLastSelectedExercise}
+        />
       ) : (
-        <div>
-          Create workout
-          <Form>
+        <div className='m-3'>
+          <h2 className='font-size-'>Select exercises to add to your workout plan</h2>
+          <Form className='flex h-10 items-center'>
             <input
+              id='exercise-search-field'
+              className='border p-2 border-gray-200'
               onChange={onExerciseSearch}
               placeholder='Start typing to search for exercise'
-              value={lastExerciseSelected}
             />
-            <button className='btn btn-primary' onClick={() => setSelectExercise(true)}>
-              Find Exercise
-            </button>
-            <label htmlFor='sets-input'>Sets</label>
-            <input id='sets-input' />
-            <label htmlFor='reps-input'>Reps</label>
-            <input id='reps-input' />
-            <button className='btn' type='submit' onClick={addExercise}>
+            <Button click={() => setOpenExerciseList(true)}>Find Exercise</Button>
+            <input className='border p-2 border-gray-200 w-14 text-center' id='sets-input' />
+            <label className='ml-3' htmlFor='sets-input'>
+              Sets
+            </label>
+            <label className='mx-4 px-2'> x </label>
+            <input className='border p-2 border-gray-200 w-14 text-center' id='reps-input' />
+            <label className='ml-3' htmlFor='reps-input'>
+              Reps
+            </label>
+            <Button type='submit' onClick={addExercise}>
               Add Exercise
-            </button>
+            </Button>
           </Form>
+          <div>{lastExerciseSelected}</div>
         </div>
       )}
     </>
