@@ -1,3 +1,20 @@
-ul {
+nav {
+  background-color: var(--nav-bg);
+  height: 3rem;
+}
+
+.container ul {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
   list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: var(--nav-text-color);
 }

@@ -1,56 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../assets/css/navbar.css';
+// import '../assets/css/navbar.css';
 
 const Navbar = () => {
   return (
-    <nav className='navbar navbar-expand-lg bg-body-tertiary'>
-      <div className='container-fluid'>
-        <button
-          className='btn btn-primary'
-          type='button'
-          data-bs-toggle='collapse'
-          data-bs-target='#navbarSupportedContent'
-          aria-controls='navbarSupportedContent'
-          aria-expanded='false'
-          aria-label='Toggle navigation'>
-          <span className='navbar-toggler-icon'></span>
-        </button>
-        <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-          <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-            <li className='nav-item'>
-              <Link className='nav-link active' aria-current='page' to='/'>
-                Home
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link className='nav-link active' aria-current='page' to='./workout'>
-                Start Workout
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link className='nav-link active' aria-current='page' to='./create-workout'>
-                Create Workout
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link className='nav-link active' aria-current='page' to='./history'>
-                Workout History
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link className='nav-link active' aria-current='page' to='./stats'>
-                Lifting Stats
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link className='nav-link active' aria-current='page' to='./settings'>
-                Settings
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <nav className='container bg-slate-500 w-full h-14 '>
+        <ul className='flex justify-evenly items-center h-full'>
+          <li className=''>
+            <Link className='' to='/'>
+              Home
+            </Link>
+          </li>
+          <li className=''>
+            <Link to='./workout'>Start Workout</Link>
+          </li>
+          <li className=''>
+            <Link className='' to='./create-workout'>
+              Create Workout
+            </Link>
+          </li>
+          <li className=''>
+            <Link className='' to='./history'>
+              Workout History
+            </Link>
+          </li>
+          <li className=''>
+            <Link className='' to='./stats'>
+              Lifting Stats
+            </Link>
+          </li>
+          <li className=''>
+            <Link className='' to='./settings'>
+              Settings
+            </Link>
+          </li>
+        </ul>
     </nav>
   );
 };

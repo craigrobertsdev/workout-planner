@@ -1,0 +1,16 @@
+#exercise-list {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+#header-buttons {
+  display: flex;
+}
+
+#list-group {
+  width: 100%;
+}
+
+#header-buttons:last-child {
+  margin-right: 0;
+}

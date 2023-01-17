@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import Button from './button';
+// import '../assets/css/exercise-list.css';
 
 const ExerciseList = () => {
+  const [currentCategory, setCategory] = useState('Legs');
+  const [selectedExercise, setSelectedExercise] = useState('');
+
   const exerciseCategories = [
     {
       name: 'Legs',
@@ -28,28 +33,27 @@ const ExerciseList = () => {
     },
   ];
 
+  const style = {
+    marginLeft: '-1px',
+    marginRight: '-1px',
+    marginBottom: '-1px',
+  };
   return (
-    <>
-      {/* Row of exercise category buttons */}
-      <div className='container mx-1'>
-        <h3>Exercise List</h3>
-        <div className='btn-group border border-dark'>
-          {exerciseCategories.map((category) => (
-            <button className='btn btn-primary' data-toggle='list' data-target={category.name}>
-              {category.name}
-            </button>
-          ))}
-          {/* Each individual group of exercises, to be displayed when the category header is clicked */}
-        </div>
-      </div>
-      <div className='bg-dark'>
+    <div id='exercise-list'>
+      <div id='header-buttons'>
         {exerciseCategories.map((category, i) => (
-          <div className='tab-pane'>
-            <ExerciseCategory key={category.name} category={category} />
-          </div>
+          <Button type={'workout-button'} click={() => setCategory(category.name)} style={style}>
+            {category.name}
+          </Button>
         ))}
       </div>
-    </>
+      <div id='exercise-categories' className='border'>
+        <ExerciseCategory
+          category={exerciseCategories.find((category) => category.name === currentCategory)}
+        />
+      </div>
+      <div>{selectedExercise}</div>
+    </div>
   );
 };
 
@@ -64,10 +68,14 @@ const ExerciseCategory = ({ category }) => {
 };
 
 const Exercise = ({ name }) => {
+  const buttonStyle = {
+    marginBottom: '-1px',
+    marginTop: '-1px',
+  };
   return (
-    <button type='button' className='btn btn-secondary'>
+    <Button type='exercise-list' click={() => setSelectedExercise(name)} style={buttonStyle}>
       {name}
-    </button>
+    </Button>
   );
 };
 
